@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Preview } from "./components/Preview/Preview";
+import { PreviewSettingsPane } from "./components/PreviewSettingsPane";
+import { MiscellaneousSettingsPane } from "./components/MiscellaneousSettingsPane";
+import { store } from "./store/Store";
+import { Container, Row, Col } from "react-grid-system";
+import { Footer } from "./components/Footer";
+
+const StateProvider = store.Provider();
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StateProvider>
+      <Container fluid>
+        <Row>
+          <Col xs={12}>
+            <Preview />
+          </Col>
+        </Row>
+        <Row style={{ minHeight: "50%" }}>
+          <Col xs={6}>
+            <PreviewSettingsPane />
+          </Col>
+          <Col xs={6}>
+            <MiscellaneousSettingsPane />
+          </Col>
+        </Row>
+        <Footer />
+      </Container>
+    </StateProvider>
   );
-}
+};
 
 export default App;
